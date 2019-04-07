@@ -11,9 +11,6 @@ export class MemberService {
     }
 
     getMembers() {
-        console.log('member getAll\'a request atılıyor!');
-        console.log(this._url);
         return this.http.get<Member[]>(this._url);
-        console.log('member getAll request atıldı!');
     }
 }

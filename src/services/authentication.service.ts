@@ -7,17 +7,10 @@ import { Member } from 'src/interface/member';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    private currentUserSubject: BehaviorSubject<Member>;
     public currentUser: Observable<Member>;
     private _url: string = 'http://localhost:8080/MemberRestAPIProject/login';
 
     constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<Member>(JSON.parse(localStorage.getItem('currentUser')));
-        this.currentUser = this.currentUserSubject.asObservable();
-    }
-
-    public get currentUserValue(): Member {
-        return this.currentUserSubject.value;
     }
 
   login(username: string, password: string) {
@@ -29,13 +22,10 @@ export class AuthenticationService {
 
     logout() {
         // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
-        this.currentUserSubject.next(null);
+        localStorage.removeItem('bearerToken');
     }
 
     public getToken(): string {
-      console.log('local storoge dan token alınıyor!');
-      console.log(localStorage.getItem('bearerToken'));
       return localStorage.getItem('bearerToken');
     }
 }
