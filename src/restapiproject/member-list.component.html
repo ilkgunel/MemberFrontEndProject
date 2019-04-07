@@ -1,0 +1,14 @@
+<h2>Member List</h2>
+<h3>{{errorMsg}}</h3>
+<ul *ngFor="let member of members">
+    <li>{{member.id}}</li>
+    <li>{{member.firstName}}</li>
+    <li>{{member.lastName}}</li>
+    <li>{{member.email}}</li>
+    <li>{{member.enabled}}</li>
+    <li>{{member.password}}</li>
+    <li>{{member.memberLanguageCode}}</li>
+    <li>{{member.roleOfMember.id}}</li>
+    <li>{{member.roleOfMember.email}}</li>
+    <li>{{member.roleOfMember.role}}</li>
+</ul>
