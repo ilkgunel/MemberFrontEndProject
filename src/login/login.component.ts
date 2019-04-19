@@ -30,7 +30,8 @@ export class LoginComponent implements OnInit {
     this.authenticationService.logout();
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = 'http://localhost:4200' + this.route.snapshot.queryParams['returnUrl'] || '/';
+    console.log(this.route.snapshot.queryParams['returnUrl']);
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'];
   }
 
   // convenience getter for easy access to form fields
@@ -49,14 +50,11 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          console.log(data.headers.get('authorization'));
-          this.error = 'Dostum 1 !';
           this.router.navigate([this.returnUrl]);
         },
         error => {
           this.error = 'Dostum!' + error;
           this.loading = false;
         });
-    this.router.navigate(['http://localhost:4200/member-list']);
   }
 }

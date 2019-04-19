@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { MemberService } from 'src/services/member.service';
 import {AuthenticationService} from '../services/authentication.service';
 import {Router} from '@angular/router';
@@ -7,9 +7,10 @@ import {Router} from '@angular/router';
 @Component({
     selector: 'member-list',
     templateUrl: './member-list.component.html',
-    styles: []
+    styleUrls: ['member-list.component.css']
 })
-export class MemberListComponent implements OnInit{
+export class MemberListComponent implements AfterViewInit{
+    displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email','enabled','password','memberLanguageCode','roleOfMember'];
     public members = [];
     public errorMsg;
     constructor(
@@ -17,7 +18,9 @@ export class MemberListComponent implements OnInit{
                 private _authService: AuthenticationService,
                 private router: Router,
                 ){}
-    ngOnInit() {
+
+    ngAfterViewInit() {
+      console.log('ngAfterViewInit içerisindeyiz: '+ localStorage.getItem('bearerToken'));
       this._memberService.getMembers().subscribe(data => this.members = data);
     }
 
