@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MemberService } from 'src/services/member.service';
+import { first, catchError, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { OperationResult } from 'src/interface/operationResult';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { throwError, of } from 'rxjs';
 
 @Component({
   selector: 'member-add',
@@ -11,15 +17,22 @@ export class MemberAddComponent implements OnInit {
   loading = false;
   submitted = false;
   error = '';
+  private operationResult : OperationResult;
 
   constructor(
     private formBuilder: FormBuilder,
+    private memberService: MemberService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.memberAddForm = this.formBuilder.group({
       firstName: ['', Validators.required],
-      lastName: ['', Validators.required]
+      lastName: ['', Validators.required],
+      email:['',Validators.required],
+      memberLanguageCode:['tr',Validators.required],
+      password:['',Validators.required],
+      confirmPassword:['',Validators.required]
     });
   }
 
@@ -29,9 +42,7 @@ export class MemberAddComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
-    console.log('tıklama ulaştı!');
-
+    let data = {};
     // stop here if form is invalid
     if (this.memberAddForm.invalid) {
       return;
@@ -39,6 +50,18 @@ export class MemberAddComponent implements OnInit {
 
     this.loading = true;
 
+    this.memberService.addUserMembers(this.memberAddForm.value) 
+      .subscribe(
+        data => {
+          console.log("data");
+          console.log(data);
+          this.router.navigate(['member-list']);
+        },
+        (error:HttpErrorResponse) => {
+          this.error = error.error.errorCode + " " + error.error.result;
+          this.loading = false;
+        }
+      );
   }
 
 }

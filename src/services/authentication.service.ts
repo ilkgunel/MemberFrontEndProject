@@ -17,7 +17,6 @@ export class AuthenticationService {
   login(username: string, password: string) {
      return this.http.post<any>(this._url,{ username, password },{observe: 'response'})
        .pipe(tap((res: HttpResponse<any> ) => {
-         console.log('login metodunun içindeyiz:'+res.headers.get('Authorization'));
          localStorage.setItem('bearerToken', res.headers.get('Authorization'));
        }));
   }
