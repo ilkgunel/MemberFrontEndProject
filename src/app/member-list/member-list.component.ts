@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { MemberService } from 'src/services/member.service';
-import {AuthenticationService} from '../services/authentication.service';
 import {Router} from '@angular/router';
+import { AuthenticationService } from 'src/services/authentication.service';
 
 
 @Component({
