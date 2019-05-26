@@ -15,15 +15,17 @@ import {JwtInterceptor} from 'src/interceptor/jwt.interceptor';
 import {ErrorInterceptor} from 'src/interceptor/error.interceptor';
 
 import {MatTableModule, MatPaginatorModule, MatSortModule, MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule} from '@angular/material';
-import { MemberListComponent } from 'src/restapiproject/member-list.component';
 import { MemberAddComponent } from './member-add/member-add.component';
+import { MemberListComponent } from './member-list/member-list.component';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    MemberAddComponent,
     MemberListComponent,
-    MemberAddComponent
+    AccessDeniedComponent
   ],
   imports: [
     BrowserModule,
