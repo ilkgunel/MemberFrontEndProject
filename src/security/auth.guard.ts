@@ -20,7 +20,6 @@ export class AuthGuard implements CanActivate{
             return false;
         }
         else if (bearerToken != null && route.data.roles) {
-            console.log("bearer token boş değil!");
             // logged in so return true
             var decoded = jwt_decode(bearerToken);
             var currentUserRole = decoded.roles;

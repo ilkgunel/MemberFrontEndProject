@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from 'src/login/login.component';
 import { AuthGuard } from 'src/security/auth.guard';
-import { MemberAddComponent } from './member-add/member-add.component';
+import { AddUserMemberComponent } from './add-user-member/add-user-member.component';
 import { MemberListComponent } from './member-list/member-list.component';
 import { Role } from 'src/enum/role';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path:"member-add",
-    component: MemberAddComponent,
+    component: AddUserMemberComponent,
     canActivate: [AuthGuard],
     data: {roles:[Role.Admin]}
   },

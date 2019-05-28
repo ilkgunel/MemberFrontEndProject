@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  getAllMembersUrl: 'http://localhost:8080/MemberRestAPIProject/memberGetWebServiceEndPoint/getAllMembers',
+  addUserMemberUrl: 'http://localhost:8080/MemberRestAPIProject/memberPostWebServiceEndPoint/saveUserMember'
 };
 
 /*

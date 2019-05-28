@@ -6,6 +6,7 @@ import { FormGroup } from '@angular/forms';
 import {catchError, first, map, tap} from 'rxjs/operators';
 import { OperationResult } from 'src/interface/operationResult';
 import { MemberWrapper } from 'src/interface/memberWrapper';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class MemberService {
@@ -14,21 +15,19 @@ export class MemberService {
     private userMember:Member;
     private memberList: Array<Member> = [];
     private postValueAsJSON : string;
-    private _url:string = 'http://localhost:8080/MemberRestAPIProject/memberGetWebServiceEndPoint/getAllMembers';
-    private _userMemberAddUrl = 'http://localhost:8080/MemberRestAPIProject/memberPostWebServiceEndPoint/saveUserMember';
 
     constructor(private http: HttpClient,
                 private memberWrapper: MemberWrapper) {
     }
 
     getMembers() {
-        return this.http.get<Member[]>(this._url);
+        return this.http.get<Member[]>(environment.getAllMembersUrl);
     }
 
     addUserMembers(value) {       
         const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         this.memberWrapper.memberList.push(value);
-        this.response1 = this.http.post<OperationResult>(this._userMemberAddUrl,JSON.stringify(this.memberWrapper),{observe: 'response',headers: headers});
+        this.response1 = this.http.post<OperationResult>(environment.addUserMemberUrl,JSON.stringify(this.memberWrapper),{observe: 'response',headers: headers});
         return this.response1;
     }
 }

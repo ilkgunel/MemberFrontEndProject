@@ -15,7 +15,7 @@ import {JwtInterceptor} from 'src/interceptor/jwt.interceptor';
 import {ErrorInterceptor} from 'src/interceptor/error.interceptor';
 
 import {MatTableModule, MatPaginatorModule, MatSortModule, MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule} from '@angular/material';
-import { MemberAddComponent } from './member-add/member-add.component';
+import { AddUserMemberComponent } from './add-user-member/add-user-member.component';
 import { MemberListComponent } from './member-list/member-list.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 
@@ -23,7 +23,7 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    MemberAddComponent,
+    AddUserMemberComponent,
     MemberListComponent,
     AccessDeniedComponent
   ],

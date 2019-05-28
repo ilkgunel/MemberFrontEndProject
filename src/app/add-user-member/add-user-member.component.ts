@@ -9,10 +9,10 @@ import { throwError, of } from 'rxjs';
 
 @Component({
   selector: 'member-add',
-  templateUrl: './member-add.component.html',
-  styleUrls: ['./member-add.component.css']
+  templateUrl: './add-user-member.component.html',
+  styleUrls: ['./add-user-member.component.css']
 })
-export class MemberAddComponent implements OnInit {
+export class AddUserMemberComponent implements OnInit {
   memberAddForm: FormGroup;
   loading = false;
   submitted = false;
