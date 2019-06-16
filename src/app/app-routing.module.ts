@@ -6,6 +6,7 @@ import { AddUserMemberComponent } from './add-user-member/add-user-member.compon
 import { MemberListComponent } from './member-list/member-list.component';
 import { Role } from 'src/enum/role';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { AddAdminMemberComponent } from './add-admin-member/add-admin-member.component';
 
 const routes: Routes = [
   {
@@ -15,8 +16,14 @@ const routes: Routes = [
     data: {roles:[Role.Admin,Role.User]}
   },
   {
-    path:"member-add",
+    path:"add-user-member",
     component: AddUserMemberComponent,
+    canActivate: [AuthGuard],
+    data: {roles:[Role.Admin,Role.User]}
+  },
+  {
+    path:"add-admin-member",
+    component: AddAdminMemberComponent,
     canActivate: [AuthGuard],
     data: {roles:[Role.Admin]}
   },

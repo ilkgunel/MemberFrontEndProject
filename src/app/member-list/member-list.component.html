@@ -1,3 +1,15 @@
+<div>
+    <a href="/add-user-member">
+      <button type="button" class="btn btn-primary" >
+          Add New User Member
+        </button>
+    </a>
+    <a href="/add-admin-member">
+        <button type="button" class="btn btn-success" style="margin-left: 5px;">Add New Admin Member</button>
+    </a>
+    <button (click)="logout()" type="button" class="btn btn-warning" style="float: right;">Logout</button>    
+</div>
+
 <table mat-table [dataSource]="members" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.

@@ -18,6 +18,7 @@ import {MatTableModule, MatPaginatorModule, MatSortModule, MatIconModule, MatFor
 import { AddUserMemberComponent } from './add-user-member/add-user-member.component';
 import { MemberListComponent } from './member-list/member-list.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { AddAdminMemberComponent } from './add-admin-member/add-admin-member.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
     LoginComponent,
     AddUserMemberComponent,
     MemberListComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
+    AddAdminMemberComponent
   ],
   imports: [
     BrowserModule,

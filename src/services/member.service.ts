@@ -24,10 +24,23 @@ export class MemberService {
         return this.http.get<Member[]>(environment.getAllMembersUrl);
     }
 
-    addUserMembers(value) {       
+    addUserMembers(value) {
+        this.clearMemberList();       
         const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         this.memberWrapper.memberList.push(value);
         this.response1 = this.http.post<OperationResult>(environment.addUserMemberUrl,JSON.stringify(this.memberWrapper),{observe: 'response',headers: headers});
         return this.response1;
+    }
+
+    addAdminMembers(value) {
+        this.clearMemberList();       
+        const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        this.memberWrapper.memberList.push(value);
+        this.response1 = this.http.post<OperationResult>(environment.addAdminMemberUrl,JSON.stringify(this.memberWrapper),{observe: 'response',headers: headers});
+        return this.response1;
+    }
+
+    private clearMemberList(){
+        this.memberList = [];
     }
 }

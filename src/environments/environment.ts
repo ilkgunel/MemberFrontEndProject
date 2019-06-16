@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   getAllMembersUrl: 'http://localhost:8080/MemberRestAPIProject/memberGetWebServiceEndPoint/getAllMembers',
-  addUserMemberUrl: 'http://localhost:8080/MemberRestAPIProject/memberPostWebServiceEndPoint/saveUserMember'
+  addUserMemberUrl: 'http://localhost:8080/MemberRestAPIProject/memberPostWebServiceEndPoint/saveUserMember',
+  addAdminMemberUrl: 'http://localhost:8080/MemberRestAPIProject/memberPostWebServiceEndPoint/saveAdminMember'
 };
 
 /*
