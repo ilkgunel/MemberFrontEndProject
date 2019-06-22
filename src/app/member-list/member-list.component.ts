@@ -6,6 +6,8 @@ import * as jwt_decode from 'jwt-decode';
 import { Role } from 'src/enum/role';
 import {SelectionModel} from '@angular/cdk/collections';
 import { Member } from 'src/interface/member';
+import { MatDialog } from '@angular/material';
+import { UpdateMemberDialog } from '../update-member-dialog/update-member-dialog.component';
 
 
 @Component({
@@ -22,6 +24,7 @@ export class MemberListComponent implements AfterViewInit{
     constructor(
                 private _memberService: MemberService,
                 private _authService: AuthenticationService,
+                public _dialog: MatDialog,
                 private router: Router,
                 ){}
 
@@ -67,4 +70,20 @@ export class MemberListComponent implements AfterViewInit{
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
   }
+
+  openMemberUpdateDialog() {
+    let selectedMember = this.selection.selected[0];
+    this._dialog.open(UpdateMemberDialog,{
+      data: {
+        id: selectedMember.id,
+        firstName: selectedMember.firstName,
+        lastName: selectedMember.lastName,
+        email: selectedMember.email, //must be passive at update dialog
+        enabled: selectedMember.enabled, //must be passive at update dialog
+        memberLanguageCode: selectedMember.memberLanguageCode,
+        password: selectedMember.password
+      }
+    });
+  }
+
 }

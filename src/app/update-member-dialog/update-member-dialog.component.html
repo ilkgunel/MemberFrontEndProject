@@ -1,0 +1,67 @@
+<h2>Update User Member</h2>
+<form [formGroup]="memberUpdateForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <table>
+            <thead>
+                <tr>
+                    <th><label for="firstName">First Name</label></th>
+                    <th><label for="lastName">Last Name</label></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                            <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                            <div *ngIf="f.lastName.errors.required">First Name is required</div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <thead>
+                <tr>
+                    <th><label for="email">E-Mail</label></th>
+                    <th><label for="memberLanguageCode">Member Language Code</label></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required">e-Mail is required</div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <mat-form-field >
+                            <mat-label>Member Language </mat-label>
+                            <mat-select formControlName="memberLanguageCode">
+                                <mat-option>--</mat-option>
+                                <mat-option *ngFor="let memberLanguageCode of memberLanguageCodes" [value]="memberLanguageCode.value">
+                                    {{memberLanguageCode.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="f.memberLanguageCode.errors && f.memberLanguageCode.errors.required">Please choose an animal</mat-error>
+                          </mat-form-field>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        
+    </div>
+
+    <div class="form-group">
+            <button [disabled]="loading" class="btn btn-primary">Update</button>
+            <button mat-button type="button" mat-dialog-close class="btn btn-primary" style="margin-left: 5px;">Cancel</button>
+            <img *ngIf="loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+    </div>
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+</form>

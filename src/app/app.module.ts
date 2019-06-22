@@ -14,11 +14,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {JwtInterceptor} from 'src/interceptor/jwt.interceptor';
 import {ErrorInterceptor} from 'src/interceptor/error.interceptor';
 
-import {MatTableModule, MatPaginatorModule, MatSortModule, MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule} from '@angular/material';
+import {MatTableModule, MatPaginatorModule, MatSortModule, MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule, MatDialogModule} from '@angular/material';
 import { AddUserMemberComponent } from './add-user-member/add-user-member.component';
 import { MemberListComponent } from './member-list/member-list.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { AddAdminMemberComponent } from './add-admin-member/add-admin-member.component';
+import { UpdateMemberDialog } from './update-member-dialog/update-member-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AddAdminMemberComponent } from './add-admin-member/add-admin-member.com
     AddUserMemberComponent,
     MemberListComponent,
     AccessDeniedComponent,
-    AddAdminMemberComponent
+    AddAdminMemberComponent,
+    UpdateMemberDialog
   ],
   imports: [
     BrowserModule,
@@ -43,8 +45,10 @@ import { AddAdminMemberComponent } from './add-admin-member/add-admin-member.com
     MatInputModule,
     MatSelectModule,
     MatCheckboxModule,
+    MatDialogModule,
     BrowserAnimationsModule
   ],
+  entryComponents:[UpdateMemberDialog],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
