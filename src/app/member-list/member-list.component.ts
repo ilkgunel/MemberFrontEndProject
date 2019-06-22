@@ -20,7 +20,9 @@ export class MemberListComponent implements AfterViewInit{
     public members = [];
     public errorMsg;
     public isAdmin:boolean = false;
+    public disableUpdateButton : boolean = true;
     selection = new SelectionModel<Member>(true, []);
+    private currentUserRole: string;
     constructor(
                 private _memberService: MemberService,
                 private _authService: AuthenticationService,
@@ -30,13 +32,18 @@ export class MemberListComponent implements AfterViewInit{
 
     ngOnInit() {
       var decoded = jwt_decode(localStorage.getItem('bearerToken'));
-      var currentUserRole = decoded.roles;
-      if(currentUserRole == Role.Admin){
-        console.log("true dönüyoruz!");
+      this.currentUserRole = decoded.roles;
+      if(this.currentUserRole == Role.Admin){
         this.isAdmin = true;
       } else {
-        console.log("false dönüyoruz!");
         this.isAdmin = false;
+      }
+
+      if(this.selection.selected.length == 0 || this.selection.selected.length > 1) {
+        this.disableUpdateButton = true;
+      }
+      else if((!this.isAdmin && this.selection.selected[0].roleOfMember.role != currentUserRole)) {
+        this.disableUpdateButton = true;
       }
     }
 
@@ -84,6 +91,20 @@ export class MemberListComponent implements AfterViewInit{
         password: selectedMember.password
       }
     });
+  }
+
+  changeEvent(event,row) {
+    if(event) {
+      this.selection.toggle(row);
+    }
+    if(this.selection.selected.length == 0 || this.selection.selected.length > 1) {
+      this.disableUpdateButton = true;
+    }
+    else if((!this.isAdmin && this.selection.selected[0].roleOfMember.role != this.currentUserRole)) {
+      this.disableUpdateButton = true;
+    } else {
+      this.disableUpdateButton = false;
+    }
   }
 
 }
