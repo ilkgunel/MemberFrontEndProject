@@ -41,10 +41,14 @@
 
                     <td>
                         <mat-form-field >
-                            <select formControlName="memberLanguageCode" matNativeControl required>
-                              <option value="tr">TR</option>
-                              <option value="en">EN</option>
-                            </select>
+                            <mat-label>Member Language </mat-label>
+                            <mat-select formControlName="memberLanguageCode">
+                                <mat-option>--</mat-option>
+                                <mat-option *ngFor="let memberLanguageCode of memberLanguageCodes" [value]="memberLanguageCode.value">
+                                    {{memberLanguageCode.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="f.memberLanguageCode.errors && f.memberLanguageCode.errors.required">Please choose an animal</mat-error>
                           </mat-form-field>
                     </td>
                 </tr>
