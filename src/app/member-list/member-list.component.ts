@@ -38,13 +38,6 @@ export class MemberListComponent implements AfterViewInit{
       } else {
         this.isAdmin = false;
       }
-
-      if(this.selection.selected.length == 0 || this.selection.selected.length > 1) {
-        this.disableUpdateButton = true;
-      }
-      else if((!this.isAdmin && this.selection.selected[0].roleOfMember.role != currentUserRole)) {
-        this.disableUpdateButton = true;
-      }
     }
 
     ngAfterViewInit() {
@@ -107,4 +100,15 @@ export class MemberListComponent implements AfterViewInit{
     }
   }
 
+  rowClickEvent(row) {
+    this.selection.toggle(row);
+    if(this.selection.selected.length == 0 || this.selection.selected.length > 1) {
+      this.disableUpdateButton = true;
+    }
+    else if((!this.isAdmin && this.selection.selected[0].roleOfMember.role != this.currentUserRole)) {
+      this.disableUpdateButton = true;
+    } else {
+      this.disableUpdateButton = false;
+    }
+  }
 }

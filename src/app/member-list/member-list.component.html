@@ -11,7 +11,7 @@
     <button (click)="logout()" type="button" class="btn btn-warning" style="float: right;">Logout</button>
 </div>
 
-<table mat-table [dataSource]="members" class="mat-elevation-z8">
+<table id="memberListTable" mat-table [dataSource]="members" class="mat-elevation-z8">
 
   <!-- Checkbox Column -->
   <ng-container matColumnDef="select">
@@ -20,14 +20,14 @@
                       [checked]="selection.hasValue() && isAllSelected()"
                       [indeterminate]="selection.hasValue() && !isAllSelected()"
                       [aria-label]="checkboxLabel()">
-        </mat-checkbox>
+        </mat-checkbox> 
       </th>
       <td mat-cell *matCellDef="let row">
-        <mat-checkbox (click)="$event.stopPropagation()"
-                      (change)="changeEvent($event,row)"
-                      [checked]="selection.isSelected(row)"
-                      [aria-label]="checkboxLabel(row)">
-        </mat-checkbox>
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="changeEvent($event,row)"
+                        [checked]="selection.isSelected(row)"
+                        [aria-label]="checkboxLabel(row)">
+          </mat-checkbox>
       </td>
     </ng-container>
   
@@ -76,5 +76,5 @@
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="rowClickEvent(row)"></tr>
   </table>
