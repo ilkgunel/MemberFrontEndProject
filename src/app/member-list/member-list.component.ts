@@ -90,18 +90,15 @@ export class MemberListComponent implements AfterViewInit{
     if(event) {
       this.selection.toggle(row);
     }
-    if(this.selection.selected.length == 0 || this.selection.selected.length > 1) {
-      this.disableUpdateButton = true;
-    }
-    else if((!this.isAdmin && this.selection.selected[0].roleOfMember.role != this.currentUserRole)) {
-      this.disableUpdateButton = true;
-    } else {
-      this.disableUpdateButton = false;
-    }
+    this.enableOrDisableUpdateButton();
   }
 
   rowClickEvent(row) {
     this.selection.toggle(row);
+    this.enableOrDisableUpdateButton();
+  }
+
+  private enableOrDisableUpdateButton() {
     if(this.selection.selected.length == 0 || this.selection.selected.length > 1) {
       this.disableUpdateButton = true;
     }
