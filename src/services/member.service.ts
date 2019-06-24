@@ -49,6 +49,6 @@ export class MemberService {
     }
 
     private clearMemberList(){
-        this.memberList = [];
+        this.memberWrapper.memberList = [];
     }
 }
