@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit, Injectable } from "@angular/core";
 import { MemberService } from 'src/services/member.service';
 import {Router} from '@angular/router';
 import { AuthenticationService } from 'src/services/authentication.service';
@@ -8,7 +8,6 @@ import {SelectionModel} from '@angular/cdk/collections';
 import { Member } from 'src/interface/member';
 import { MatDialog } from '@angular/material';
 import { UpdateMemberDialog } from '../update-member-dialog/update-member-dialog.component';
-
 
 @Component({
     selector: 'member-list',
@@ -73,7 +72,7 @@ export class MemberListComponent implements AfterViewInit{
 
   openMemberUpdateDialog() {
     let selectedMember = this.selection.selected[0];
-    this._dialog.open(UpdateMemberDialog,{
+    let dialogRef = this._dialog.open(UpdateMemberDialog,{
       data: {
         id: selectedMember.id,
         firstName: selectedMember.firstName,
@@ -83,6 +82,11 @@ export class MemberListComponent implements AfterViewInit{
         memberLanguageCode: selectedMember.memberLanguageCode,
         password: selectedMember.password
       }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this._memberService.getMembers().subscribe(data => this.members = data);
+      this.masterToggle();
     });
   }
 

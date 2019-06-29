@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MemberLanguageCode } from 'src/interface/memberLanguageCode';
 import { MemberService } from 'src/services/member.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MemberListComponent } from '../member-list/member-list.component';
 
 @Component({
   selector: 'app-update-member-dialog',
@@ -25,12 +26,13 @@ export class UpdateMemberDialog implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public member: Member,
               public dialogRef: MatDialogRef<UpdateMemberDialog>,
               private formBuilder: FormBuilder,
-              private memberService: MemberService,) {
+              private memberService: MemberService) {
   }
 
   ngOnInit() {
     console.log("ng init çalıştı!"); 
     this.memberUpdateForm = this.formBuilder.group({
+      id:[this.member.id,Validators.required],
       firstName: [this.member.firstName, Validators.required],
       lastName: [this.member.lastName, Validators.required],
       email:[this.member.email,Validators.required],
@@ -55,6 +57,8 @@ export class UpdateMemberDialog implements OnInit {
     this.memberService.updateAdminMember(this.memberUpdateForm.value) 
       .subscribe(
         data => {
+          this.dialogRef.close();
+          //this.memberService.getMembers().subscribe(data => this.memberList.members);
         },
         (error:HttpErrorResponse) => {
           this.error = error.error.errorCode + " " + error.error.result;
