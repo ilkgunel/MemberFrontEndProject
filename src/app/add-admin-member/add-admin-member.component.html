@@ -40,13 +40,17 @@
                     </td>
 
                     <td>
-                        <mat-form-field >
-                            <select formControlName="memberLanguageCode" matNativeControl required>
-                              <option value="tr">TR</option>
-                              <option value="en">EN</option>
-                            </select>
-                          </mat-form-field>
-                    </td>
+                            <mat-form-field >
+                                <mat-label>Member Language </mat-label>
+                                <mat-select formControlName="memberLanguageCode">
+                                    <mat-option>--</mat-option>
+                                    <mat-option *ngFor="let memberLanguageCode of memberLanguageCodes" [value]="memberLanguageCode.value">
+                                        {{memberLanguageCode.name}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="f.memberLanguageCode.errors && f.memberLanguageCode.errors.required">Choose member language code!</mat-error>
+                              </mat-form-field>
+                        </td>
                 </tr>
             </tbody>
 
@@ -59,13 +63,13 @@
             <tbody>
                 <tr>
                     <td>
-                        <input type="text" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                             <div *ngIf="f.password.errors.required">Password is required</div>
                         </div>
                     </td>
                     <td>
-                        <input type="text" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+                        <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
                         <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
                             <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
                         </div>

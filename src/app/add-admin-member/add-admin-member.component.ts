@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { OperationResult } from 'src/interface/operationResult';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { throwError, of } from 'rxjs';
+import { MemberLanguageCode } from 'src/interface/memberLanguageCode';
 
 @Component({
   selector: 'app-add-admin-member',
@@ -19,6 +20,10 @@ export class AddAdminMemberComponent implements OnInit {
   submitted = false;
   error = '';
   private operationResult : OperationResult;
+  memberLanguageCodes : MemberLanguageCode[] = [
+    {name: 'TR', value: 'tr'},
+    {name: 'EN', value: 'en'},
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,7 +36,7 @@ export class AddAdminMemberComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email:['',Validators.required],
-      memberLanguageCode:['tr',Validators.required],
+      memberLanguageCode:['',Validators.required],
       password:['',Validators.required],
       confirmPassword:['',Validators.required]
     });
