@@ -3,7 +3,7 @@ import { Role } from 'src/enum/role';
 import { Injectable } from '@angular/core';
 
 @Injectable({providedIn : 'root'})
-export class SecurtyUtil {
+export class SecurityUtil {
 
     isAdmin() :boolean {
         var decoded = jwt_decode(localStorage.getItem('bearerToken'));

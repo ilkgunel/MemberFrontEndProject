@@ -4,7 +4,7 @@ import { MemberService } from 'src/services/member.service';
 import * as jwt_decode from 'jwt-decode';
 import { Role } from 'src/enum/role';
 import { HttpErrorResponse } from '@angular/common/http';
-import { SecurtyUtil } from 'src/security/security.util';
+import { SecurityUtil } from 'src/security/security.util';
 
 @Component({
   selector: 'app-delete-member-dialog',
@@ -22,7 +22,7 @@ export class DeleteMemberDialog implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               public dialogRef: MatDialogRef<DeleteMemberDialog>,
               private memberService: MemberService,
-              private securityUtil: SecurtyUtil) {
+              private securityUtil: SecurityUtil) {
   }
 
   ngOnInit() {
@@ -31,6 +31,7 @@ export class DeleteMemberDialog implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    this.loading = true;
 
     if(this.isAdmin) {
       this.memberService.deleteMember(this.data.selectedMemberIdArray).subscribe(

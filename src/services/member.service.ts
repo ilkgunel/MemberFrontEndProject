@@ -40,7 +40,7 @@ export class MemberService {
         return this.response;
     }
 
-    updateAdminMember(value) {
+    updateMember(value) { //To update both of admin and user
         this.clearMemberList();       
         const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         this.memberWrapper.memberList.push(value);
@@ -48,9 +48,21 @@ export class MemberService {
         return this.response;
     }
 
+    updateUserMember(value) { //To update only user
+        this.clearMemberList();       
+        const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        this.memberWrapper.memberList.push(value);
+        this.response = this.http.put<OperationResult>(environment.updateUserMemberUrl,JSON.stringify(this.memberWrapper),{observe: 'response',headers: headers});
+        return this.response;
+    }
+
     deleteUserMember(value) {
+        let memberIdList = [];
+        for(let i = 0; i<value.length;i++) {
+            memberIdList.push({'id': + value[i]});
+        }
         const httpOptions = {
-            headers: new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8'), body: JSON.stringify(value)
+            headers: new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8'), body: JSON.stringify(memberIdList)
         };
         let response : Observable<OperationResult> = this.http.delete<OperationResult>(environment.deleteUserMemberUrl, httpOptions);
         return response;

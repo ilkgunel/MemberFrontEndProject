@@ -88,7 +88,8 @@ export class MemberListComponent implements AfterViewInit{
 
     dialogRef.afterClosed().subscribe(result => {
       this._memberService.getMembers().subscribe(data => this.members = data);
-      this.masterToggle();
+      this.selection.clear();
+      this.enableOrDisableUpdateAndDeleteButton();
     });
   }
 
@@ -105,7 +106,8 @@ export class MemberListComponent implements AfterViewInit{
 
     dialogRef.afterClosed().subscribe(result => {
       this._memberService.getMembers().subscribe(data => this.members = data);
-      this.masterToggle();
+      this.selection.clear();
+      this.enableOrDisableUpdateAndDeleteButton();
     });
   }
 
@@ -142,6 +144,8 @@ export class MemberListComponent implements AfterViewInit{
           this.disableDeleteButton = false;
         }
       }
+    } else {
+      this.disableDeleteButton = true;
     }
   }
 }

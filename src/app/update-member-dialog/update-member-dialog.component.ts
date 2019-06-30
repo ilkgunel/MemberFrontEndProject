@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MemberLanguageCode } from 'src/interface/memberLanguageCode';
 import { MemberService } from 'src/services/member.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MemberListComponent } from '../member-list/member-list.component';
+import { SecurityUtil } from 'src/security/security.util';
 
 @Component({
   selector: 'app-update-member-dialog',
@@ -18,6 +18,7 @@ export class UpdateMemberDialog implements OnInit {
   loading = false;
   submitted = false;
   error = '';
+  isAdmin: boolean = false;
   memberLanguageCodes : MemberLanguageCode[] = [
     {name: 'TR', value: 'tr'},
     {name: 'EN', value: 'en'},
@@ -26,10 +27,12 @@ export class UpdateMemberDialog implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public member: Member,
               public dialogRef: MatDialogRef<UpdateMemberDialog>,
               private formBuilder: FormBuilder,
-              private memberService: MemberService) {
+              private memberService: MemberService,
+              private securityUtil: SecurityUtil) {
   }
 
   ngOnInit() {
+    this.isAdmin = this.securityUtil.isAdmin();
     this.memberUpdateForm = this.formBuilder.group({
       id:[this.member.id,Validators.required],
       firstName: [this.member.firstName, Validators.required],
@@ -52,7 +55,8 @@ export class UpdateMemberDialog implements OnInit {
 
     this.loading = true;
 
-    this.memberService.updateAdminMember(this.memberUpdateForm.value) 
+    if(this.isAdmin) {
+      this.memberService.updateMember(this.memberUpdateForm.value) 
       .subscribe(
         data => {
           this.dialogRef.close();
@@ -60,8 +64,16 @@ export class UpdateMemberDialog implements OnInit {
         (error:HttpErrorResponse) => {
           this.error = error.error.errorCode + " " + error.error.result;
           this.loading = false;
-        }
-      );
+        });
+    } else {
+      this.memberService.updateUserMember(this.memberUpdateForm.value).subscribe(data => {
+        this.dialogRef.close();
+      },
+      (error : HttpErrorResponse) => {
+        this.error = error.error.errorCode + " " + error.error.result;
+          this.loading = false;
+      });
+    }
   }
 
 }
