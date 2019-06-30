@@ -62,6 +62,7 @@ export class MemberListComponent implements AfterViewInit{
     this.isAllSelected() ?
         this.selection.clear() :
         this.members.forEach(row => this.selection.select(row));
+    this.enableOrDisableUpdateAndDeleteButton();
   }
 
   /** The label for the checkbox on the passed row */
