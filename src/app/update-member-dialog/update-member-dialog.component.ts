@@ -30,7 +30,6 @@ export class UpdateMemberDialog implements OnInit {
   }
 
   ngOnInit() {
-    console.log("ng init çalıştı!"); 
     this.memberUpdateForm = this.formBuilder.group({
       id:[this.member.id,Validators.required],
       firstName: [this.member.firstName, Validators.required],
@@ -46,7 +45,6 @@ export class UpdateMemberDialog implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    let data = {};
     // stop here if form is invalid
     if (this.memberUpdateForm.invalid) {
       return;
@@ -58,7 +56,6 @@ export class UpdateMemberDialog implements OnInit {
       .subscribe(
         data => {
           this.dialogRef.close();
-          //this.memberService.getMembers().subscribe(data => this.memberList.members);
         },
         (error:HttpErrorResponse) => {
           this.error = error.error.errorCode + " " + error.error.result;

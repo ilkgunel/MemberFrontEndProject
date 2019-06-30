@@ -17,15 +17,16 @@ export class ErrorInterceptor implements HttpInterceptor {
                 location.reload(true);
             } else if(err.status === 400) {
                 console.log("400 hatası alındı!");
+                err.error.result = err.error.errorMessage;
                 console.log(err.error.result);
                 return throwError(err);
             } else if(err.status === 404) {
-                console.log("404 hatası alındı!");
-                console.log(err);
+                err.error.errorCode = 404;
+                err.error.result = err.message;
+                err.error.message = err.message;
+                err.statusText = err.message;
             }
-
-            const error = err.error.message || err.statusText;
-            return throwError(error);
+            return throwError(err);
         }))
     }
 }

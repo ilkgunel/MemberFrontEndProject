@@ -20,6 +20,7 @@ import { MemberListComponent } from './member-list/member-list.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { AddAdminMemberComponent } from './add-admin-member/add-admin-member.component';
 import { UpdateMemberDialog } from './update-member-dialog/update-member-dialog.component';
+import { DeleteMemberDialog } from './delete-member-dialog/delete-member-dialog.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { UpdateMemberDialog } from './update-member-dialog/update-member-dialog.
     MemberListComponent,
     AccessDeniedComponent,
     AddAdminMemberComponent,
-    UpdateMemberDialog
+    UpdateMemberDialog,
+    DeleteMemberDialog
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,7 @@ import { UpdateMemberDialog } from './update-member-dialog/update-member-dialog.
     MatDialogModule,
     BrowserAnimationsModule
   ],
-  entryComponents:[UpdateMemberDialog],
+  entryComponents:[UpdateMemberDialog,DeleteMemberDialog],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

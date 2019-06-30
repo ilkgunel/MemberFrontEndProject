@@ -7,7 +7,10 @@ export const environment = {
   getAllMembersUrl: 'http://localhost:8080/MemberRestAPIProject/memberGetWebServiceEndPoint/getAllMembers',
   addUserMemberUrl: 'http://localhost:8080/MemberRestAPIProject/memberPostWebServiceEndPoint/saveUserMember',
   addAdminMemberUrl: 'http://localhost:8080/MemberRestAPIProject/memberPostWebServiceEndPoint/saveAdminMember',
-  updateAdminMemberUrl: 'http://localhost:8080/MemberRestAPIProject/memberUpdateWebServiceEndpoint/updateAdminMember'
+  updateAdminMemberUrl: 'http://localhost:8080/MemberRestAPIProject/memberUpdateWebServiceEndpoint/updateAdminMember',
+  updateUserMemberUrl: 'http://localhost:8080/MemberRestAPIProject/memberUpdateWebServiceEndpoint/updateUserMember',
+  deleteAdminMemberUrl: 'http://localhost:8080/MemberRestAPIProject/memberDeleteWebServiceEndPoint/deleteAdminMember',
+  deleteUserMemberUrl: 'http://localhost:8080/MemberRestAPIProject/memberDeleteWebServiceEndPoint/deleteUserMember'
 };
 
 /*

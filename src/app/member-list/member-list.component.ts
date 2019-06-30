@@ -8,6 +8,7 @@ import {SelectionModel} from '@angular/cdk/collections';
 import { Member } from 'src/interface/member';
 import { MatDialog } from '@angular/material';
 import { UpdateMemberDialog } from '../update-member-dialog/update-member-dialog.component';
+import { DeleteMemberDialog } from '../delete-member-dialog/delete-member-dialog.component';
 
 @Component({
     selector: 'member-list',
@@ -20,6 +21,7 @@ export class MemberListComponent implements AfterViewInit{
     public errorMsg;
     public isAdmin:boolean = false;
     public disableUpdateButton : boolean = true;
+    public disableDeleteButton : boolean = true;
     selection = new SelectionModel<Member>(true, []);
     private currentUserRole: string;
     constructor(
@@ -90,19 +92,36 @@ export class MemberListComponent implements AfterViewInit{
     });
   }
 
+  openMemberDeleteDialog() {
+    let selectedMemberIdArray : Array<Number> = [];
+    for(let i=0;i<this.selection.selected.length;i++){
+      selectedMemberIdArray.push(this.selection.selected[i].id);
+    }
+    let dialogRef = this._dialog.open(DeleteMemberDialog,{
+      data: {
+        selectedMemberIdArray : selectedMemberIdArray
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this._memberService.getMembers().subscribe(data => this.members = data);
+      this.masterToggle();
+    });
+  }
+
   changeEvent(event,row) {
     if(event) {
       this.selection.toggle(row);
     }
-    this.enableOrDisableUpdateButton();
+    this.enableOrDisableUpdateAndDeleteButton();
   }
 
   rowClickEvent(row) {
     this.selection.toggle(row);
-    this.enableOrDisableUpdateButton();
+    this.enableOrDisableUpdateAndDeleteButton();
   }
 
-  private enableOrDisableUpdateButton() {
+  private enableOrDisableUpdateAndDeleteButton() {
     if(this.selection.selected.length == 0 || this.selection.selected.length > 1) {
       this.disableUpdateButton = true;
     }
@@ -110,6 +129,19 @@ export class MemberListComponent implements AfterViewInit{
       this.disableUpdateButton = true;
     } else {
       this.disableUpdateButton = false;
+    }
+
+    if(this.selection.selected.length > 0 && this.isAdmin) {
+      this.disableDeleteButton = false;
+    } else if(this.selection.selected.length > 0 && !this.isAdmin) {
+      for(let i=0;i<this.selection.selected.length;i++) {
+        if(this.currentUserRole != this.selection.selected[i].roleOfMember.role) {
+          this.disableDeleteButton = true;
+          break;
+        } else{
+          this.disableDeleteButton = false;
+        }
+      }
     }
   }
 }

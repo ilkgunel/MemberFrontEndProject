@@ -48,6 +48,26 @@ export class MemberService {
         return this.response;
     }
 
+    deleteUserMember(value) {
+        const httpOptions = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8'), body: JSON.stringify(value)
+        };
+        let response : Observable<OperationResult> = this.http.delete<OperationResult>(environment.deleteUserMemberUrl, httpOptions);
+        return response;
+    }
+
+    deleteMember(value) {
+        let memberIdList = [];
+        for(let i = 0; i<value.length;i++) {
+            memberIdList.push({'id': + value[i]});
+        }
+        const httpOptions = {
+            headers: new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8'), body: JSON.stringify(memberIdList)
+        };
+        let response : Observable<OperationResult> = this.http.delete<OperationResult>(environment.deleteAdminMemberUrl, httpOptions);
+        return response;
+    }
+
     private clearMemberList(){
         this.memberWrapper.memberList = [];
     }
