@@ -71,7 +71,7 @@ export class UpdateMemberDialog implements OnInit {
       },
       (error : HttpErrorResponse) => {
         this.error = error.error.errorCode + " " + error.error.result;
-          this.loading = false;
+        this.loading = false;
       });
     }
   }

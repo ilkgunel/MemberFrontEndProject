@@ -16,17 +16,29 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this.authenticationService.logout();
                 location.reload(true);
             } else if(err.status === 400) {
-                console.log("400 hatası alındı!");
-                err.error.result = err.error.errorMessage;
-                console.log(err.error.result);
-                return throwError(err);
+                if(!err.error.errorCode) {
+                    err.error.errorCode = 400;
+                }
+                if(!err.error.result) {
+                    err.error.result = err.message;
+                }
+                if(!err.error.message) {
+                    err.error.message = err.message;
+                }
+                err.statusText = err.message;
             } else if(err.status === 403) {
                 err.errorCode = 403;
                 err.message = "Yetkisiz erişim ya da aktifleştirilmemiş hesap."
             } else if(err.status === 404) {
-                err.error.errorCode = 404;
-                err.error.result = err.message;
-                err.error.message = err.message;
+                if(!err.error.errorCode) {
+                    err.error.errorCode = 404;
+                }
+                if(!err.error.result) {
+                    err.error.result = err.message;
+                }
+                if(!err.error.message) {
+                    err.error.message = err.message;
+                }
                 err.statusText = err.message;
             }
             return throwError(err);

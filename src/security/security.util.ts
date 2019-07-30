@@ -13,4 +13,9 @@ export class SecurityUtil {
           return false;
         }
     }
+
+    mailAddressFromToken() : string {
+      var decoded = jwt_decode(localStorage.getItem('bearerToken'));
+      return decoded.sub;
+    }
 }

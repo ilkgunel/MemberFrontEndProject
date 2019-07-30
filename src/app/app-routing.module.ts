@@ -7,6 +7,7 @@ import { MemberListComponent } from './member-list/member-list.component';
 import { Role } from 'src/enum/role';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { AddAdminMemberComponent } from './add-admin-member/add-admin-member.component';
+import { ResetPassword } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
     component: AddAdminMemberComponent,
     canActivate: [AuthGuard],
     data: {roles:[Role.Admin]}
+  },
+  {
+    path:"reset-password",
+    component: ResetPassword
   },
   {
     path: '',

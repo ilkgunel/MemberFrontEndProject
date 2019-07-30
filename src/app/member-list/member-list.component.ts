@@ -45,7 +45,7 @@ export class MemberListComponent implements AfterViewInit{
       this._memberService.getMembers().subscribe(data => this.members = data);
     }
 
-  public logout(){
+  public logout() {
     this._authService.logout();
     this.router.navigate(['/login']);
   }

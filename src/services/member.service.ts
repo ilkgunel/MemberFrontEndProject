@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
-import {HttpClient, HttpErrorResponse, HttpResponse, HttpHeaders} from '@angular/common/http';
+import { Injectable, Inject } from "@angular/core";
+import {HttpClient, HttpResponse, HttpHeaders} from '@angular/common/http';
 import { Member } from 'src/interface/member';
-import { Observable, throwError } from 'rxjs';
-import { FormGroup } from '@angular/forms';
-import {catchError, first, map, tap} from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { OperationResult } from 'src/interface/operationResult';
 import { MemberWrapper } from 'src/interface/memberWrapper';
 import { environment } from 'src/environments/environment';
+import { CheckPasswordResetToken } from 'src/interface/CheckPasswordResetToken';
+import { LOCALE_ID } from '@angular/core';
 
 @Injectable()
 export class MemberService {
@@ -17,7 +17,8 @@ export class MemberService {
     private postValueAsJSON : string;
 
     constructor(private http: HttpClient,
-                private memberWrapper: MemberWrapper) {
+                private memberWrapper: MemberWrapper,
+                @Inject(LOCALE_ID) private locale:string) {
     }
 
     getMembers() {
@@ -44,7 +45,7 @@ export class MemberService {
         this.clearMemberList();       
         const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         this.memberWrapper.memberList.push(value);
-        this.response = this.http.put<OperationResult>(environment.updateAdminMemberUrl,JSON.stringify(this.memberWrapper),{observe: 'response',headers: headers});
+        this.response = this.http.put<OperationResult>(environment.updateMemberByAdminUrl,JSON.stringify(this.memberWrapper),{observe: 'response',headers: headers});
         return this.response;
     }
 
@@ -76,11 +77,29 @@ export class MemberService {
         const httpOptions = {
             headers: new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8'), body: JSON.stringify(memberIdList)
         };
-        let response : Observable<OperationResult> = this.http.delete<OperationResult>(environment.deleteAdminMemberUrl, httpOptions);
+        let response : Observable<OperationResult> = this.http.delete<OperationResult>(environment.deleteMemberByAdminUrl, httpOptions);
         return response;
+    }
+
+    checkingPasswordResetToken(token) {
+        let checkPasswordResetToken:CheckPasswordResetToken = {} as any;
+        checkPasswordResetToken.token = token;
+        checkPasswordResetToken.locale = this.locale.substr(0,2);
+        this.response = this.http.post<OperationResult>(environment.checkResetPasswordTokenUrl,JSON.stringify(checkPasswordResetToken),{observe: 'response',headers: this.getHeaders()});
+        return this.response;
+    }
+
+    sendingPasswordResetMail(value) {
+        this.response = this.http.post<OperationResult>(environment.sentPasswordResetMailUrl,value,{observe: 'response',headers: this.getHeaders()});
+        return this.response;
     }
 
     private clearMemberList(){
         this.memberWrapper.memberList = [];
+    }
+
+    private getHeaders() : HttpHeaders {
+        const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return headers;
     }
 }

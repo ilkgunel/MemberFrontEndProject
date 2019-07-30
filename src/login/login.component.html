@@ -49,12 +49,7 @@
                 <div *ngIf="error" class="alert alert-danger">{{error}}</div>
 
                 <div class="text-center p-t-12">
-                    <span class="txt1">
-                        Forgot
-                    </span>
-                    <a class="txt2" href="#">
-                        Username / Password?
-                    </a>
+                    <button (click)="openPasswordResetMailDialog()" type="button" class="btn btn-info" style="margin-left: 5px;">Forgot Username / Password?</button>    
                 </div>
 
                 <div class="text-center p-t-136">
