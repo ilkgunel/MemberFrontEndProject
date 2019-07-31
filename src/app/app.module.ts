@@ -23,6 +23,7 @@ import { UpdateMemberDialog } from './update-member-dialog/update-member-dialog.
 import { DeleteMemberDialog } from './delete-member-dialog/delete-member-dialog.component';
 import { ResetPassword } from './reset-password/reset-password.component';
 import { ResetPasswordMailDialog } from './reset-password-mail-dialog/reset-password-mail-dialog.component';
+import { PasswordUpdateDialog } from './password-update-dialog/password-update-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ResetPasswordMailDialog } from './reset-password-mail-dialog/reset-pass
     UpdateMemberDialog,
     DeleteMemberDialog,
     ResetPassword,
-    ResetPasswordMailDialog
+    ResetPasswordMailDialog,
+    PasswordUpdateDialog
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,7 @@ import { ResetPasswordMailDialog } from './reset-password-mail-dialog/reset-pass
     MatDialogModule,
     BrowserAnimationsModule
   ],
-  entryComponents:[UpdateMemberDialog,DeleteMemberDialog,ResetPasswordMailDialog],
+  entryComponents:[UpdateMemberDialog,DeleteMemberDialog,ResetPasswordMailDialog,PasswordUpdateDialog],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

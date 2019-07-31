@@ -9,6 +9,7 @@ import { Member } from 'src/interface/member';
 import { MatDialog } from '@angular/material';
 import { UpdateMemberDialog } from '../update-member-dialog/update-member-dialog.component';
 import { DeleteMemberDialog } from '../delete-member-dialog/delete-member-dialog.component';
+import { PasswordUpdateDialog } from '../password-update-dialog/password-update-dialog.component';
 
 @Component({
     selector: 'member-list',
@@ -110,6 +111,10 @@ export class MemberListComponent implements AfterViewInit{
       this.selection.clear();
       this.enableOrDisableUpdateAndDeleteButton();
     });
+  }
+
+  openPasswordUpdateDialog() {
+    let dialogRef = this._dialog.open(PasswordUpdateDialog,{});
   }
 
   changeEvent(event,row) {

@@ -13,19 +13,22 @@ export class ResetPassword implements OnInit {
 
   public showNewPasswordAreas : boolean;
   public errorMessage: string;
+  public passwordResetMessage : string;
 
   resetPasswordForm : FormGroup;
 
   loading = false;
   submitted = false;
 
+  resetPasswordToken = '';
+
   constructor(private route:ActivatedRoute,
               private memberService: MemberService,
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    let resetPasswordToken = this.route.snapshot.queryParams["resetToken"];
-    this.memberService.checkingPasswordResetToken(resetPasswordToken)
+    this.resetPasswordToken = this.route.snapshot.queryParams["resetToken"];
+    this.memberService.checkingPasswordResetToken(this.resetPasswordToken)
     .subscribe(data => {
       this.showNewPasswordAreas = true;
     },
@@ -53,14 +56,21 @@ export class ResetPassword implements OnInit {
 
     this.loading = true;
 
-    console.log(this.resetPasswordForm.value.newPassword);
-    console.log(this.resetPasswordForm.value.repeatedNewPassword);
-
     if(this.resetPasswordForm.value.newPassword != this.resetPasswordForm.value.repeatedNewPassword) {
       this.errorMessage = "Passwords do not match!"
       this.loading = false;
       return;
     }
+
+    this.memberService.resetPassword(this.resetPasswordForm.value.newPassword,this.resetPasswordForm.value.repeatedNewPassword,this.resetPasswordToken)
+    .subscribe(data => {
+                this.passwordResetMessage = data.body.result;
+                this.loading = false;
+              },
+               (error:HttpErrorResponse) => {
+                 this.errorMessage = error.error.errorCode + ' ' + error.error.errorMessage;
+                 this.loading = false;
+               });
 
   }
 
