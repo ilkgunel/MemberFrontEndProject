@@ -7,8 +7,8 @@ import { MemberWrapper } from 'src/interface/memberWrapper';
 import { environment } from 'src/environments/environment';
 import { CheckPasswordResetToken } from 'src/interface/CheckPasswordResetToken';
 import { LOCALE_ID } from '@angular/core';
-import { ResetPassword } from 'src/app/reset-password/reset-password.component';
-import { ResestPasswordInterface } from 'src/interface/resetPassword';
+import { ResestPasswordInterface } from 'src/interface/resetPasswordInterface';
+import { UpdatePasswordInterface } from 'src/interface/updatePasswordInterface';
 
 @Injectable()
 export class MemberService {
@@ -103,6 +103,16 @@ export class MemberService {
         resestPasswordInterface.token = token;
         resestPasswordInterface.locale = this.locale.substr(0,2);
         this.response = this.http.post<OperationResult>(environment.resetPasswordUrl,JSON.stringify(resestPasswordInterface),{observe: 'response',headers: this.getHeaders()});
+        return this.response;
+    }
+
+    updatePassword(emailOfCurrentUser, newPassword, oldPassword) {
+        let updatePasswordInterface:UpdatePasswordInterface = {} as any;
+        updatePasswordInterface.email = emailOfCurrentUser;
+        updatePasswordInterface.newPassword = newPassword;
+        updatePasswordInterface.oldPassword = oldPassword;
+
+        this.response = this.http.post<OperationResult>(environment.updatePasswordUrl,JSON.stringify(updatePasswordInterface),{observe: 'response',headers: this.getHeaders()});
         return this.response;
     }
 

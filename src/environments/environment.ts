@@ -13,7 +13,8 @@ export const environment = {
   deleteUserMemberUrl: 'http://localhost:8080/MemberRestAPIProject/memberDeleteWebServiceEndPoint/deleteUserMember',
   checkResetPasswordTokenUrl: 'http://localhost:8080/MemberRestAPIProject/resetPassword/checkToken',
   sentPasswordResetMailUrl: 'http://localhost:8080/MemberRestAPIProject/resetPassword/resetToken',
-  resetPasswordUrl: 'http://localhost:8080/MemberRestAPIProject/resetPassword/resetPassword'
+  resetPasswordUrl: 'http://localhost:8080/MemberRestAPIProject/resetPassword/resetPassword',
+  updatePasswordUrl: 'http://localhost:8080/MemberRestAPIProject/changePassword/change'
 };
 
 /*

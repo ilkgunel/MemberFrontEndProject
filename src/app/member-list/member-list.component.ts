@@ -114,7 +114,10 @@ export class MemberListComponent implements AfterViewInit{
   }
 
   openPasswordUpdateDialog() {
-    let dialogRef = this._dialog.open(PasswordUpdateDialog,{});
+    let dialogRef = this._dialog.open(PasswordUpdateDialog,{
+      height: '324px',
+      width: '462px',
+    });
   }
 
   changeEvent(event,row) {
