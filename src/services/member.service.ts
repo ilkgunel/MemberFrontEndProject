@@ -9,6 +9,7 @@ import { CheckPasswordResetToken } from 'src/interface/CheckPasswordResetToken';
 import { LOCALE_ID } from '@angular/core';
 import { ResestPasswordInterface } from 'src/interface/resetPasswordInterface';
 import { UpdatePasswordInterface } from 'src/interface/updatePasswordInterface';
+import { ResetPasswordTokenInterface } from 'src/interface/resetPasswordTokenInterface';
 
 @Injectable()
 export class MemberService {
@@ -92,7 +93,10 @@ export class MemberService {
     }
 
     sendingPasswordResetMail(value) {
-        this.response = this.http.post<OperationResult>(environment.sentPasswordResetMailUrl,value,{observe: 'response',headers: this.getHeaders()});
+        let resetPasswordTokenInterface:ResetPasswordTokenInterface = {} as any;
+        resetPasswordTokenInterface.email = value.email;
+        resetPasswordTokenInterface.locale = this.locale.substr(0,2);
+        this.response = this.http.post<OperationResult>(environment.sentPasswordResetMailUrl,JSON.stringify(resetPasswordTokenInterface),{observe: 'response',headers: this.getHeaders()});
         return this.response;
     }
 

@@ -39,7 +39,7 @@ export class ResetPasswordMailDialog implements OnInit {
     }
     this.loading = true;
     
-    this.memberService.sendingPasswordResetMail(this.resetPasswordMailForm.value.email)
+    this.memberService.sendingPasswordResetMail(this.resetPasswordMailForm.value)
     .subscribe(
       data=>{
         this.sendMailMessage = data.body.result;
