@@ -120,6 +120,16 @@ export class MemberService {
         return this.response;
     }
 
+    addBulkAdmin(formData) {
+        this.response = this.http.post<OperationResult>(environment.bulkAdminAddUrl, formData, {observe : 'response'} );
+        return this.response;
+    }
+
+    addBulkUser(formData) {
+        this.response = this.http.post<OperationResult>(environment.bulkUserAddUrl, formData, {observe : 'response'} );
+        return this.response;
+    }
+
     private clearMemberList(){
         this.memberWrapper.memberList = [];
     }

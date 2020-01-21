@@ -14,7 +14,9 @@ export const environment = {
   checkResetPasswordTokenUrl: 'http://localhost:8080/MemberRestAPIProject/resetPassword/checkToken',
   sentPasswordResetMailUrl: 'http://localhost:8080/MemberRestAPIProject/resetPassword/resetToken',
   resetPasswordUrl: 'http://localhost:8080/MemberRestAPIProject/resetPassword/resetPassword',
-  updatePasswordUrl: 'http://localhost:8080/MemberRestAPIProject/changePassword/change'
+  updatePasswordUrl: 'http://localhost:8080/MemberRestAPIProject/changePassword/change',
+  bulkAdminAddUrl: 'http://localhost:8080/MemberRestAPIProject/bulk/add/admin',
+  bulkUserAddUrl: 'http://localhost:8080/MemberRestAPIProject/bulk/add/user'
 };
 
 /*

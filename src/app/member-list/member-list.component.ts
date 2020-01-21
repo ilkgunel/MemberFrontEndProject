@@ -10,6 +10,8 @@ import { MatDialog } from '@angular/material';
 import { UpdateMemberDialog } from '../update-member-dialog/update-member-dialog.component';
 import { DeleteMemberDialog } from '../delete-member-dialog/delete-member-dialog.component';
 import { PasswordUpdateDialog } from '../password-update-dialog/password-update-dialog.component';
+import { AddBulkAdminMemberDialog } from '../add-bulk-admin-member-dialog/add-bulk-admin-member-dialog.component';
+import { AddBulkUserMemberDialog } from '../add-bulk-user-member-dialog/add-bulk-user-member-dialog.component';
 
 @Component({
     selector: 'member-list',
@@ -115,6 +117,20 @@ export class MemberListComponent implements AfterViewInit{
 
   openPasswordUpdateDialog() {
     let dialogRef = this._dialog.open(PasswordUpdateDialog,{
+      height: '324px',
+      width: '462px',
+    });
+  }
+
+  openBulkAdminMemberAddingDialog() {
+    let dialogRef = this._dialog.open(AddBulkAdminMemberDialog,{
+      height: '324px',
+      width: '462px',
+    });
+  }
+
+  openBulkUserMemberAddingDialog() {
+    let dialogRef = this._dialog.open(AddBulkUserMemberDialog,{
       height: '324px',
       width: '462px',
     });

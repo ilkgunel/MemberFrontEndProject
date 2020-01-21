@@ -11,6 +11,9 @@
     <button [disabled]="disableDeleteButton" (click)="openMemberDeleteDialog()" type="button" class="btn btn-danger" style="margin-left: 5px;">Delete Member</button>
     <button (click)="openPasswordUpdateDialog()" type="button" class="btn btn-warning" style="margin-left: 5px;">Update My Password</button>
 
+    <button (click)="openBulkAdminMemberAddingDialog()" type="button" class="btn btn-secondary" style="margin-left: 5px;">Add Bulk Admin Member</button>
+    <button (click)="openBulkUserMemberAddingDialog()" type="button" class="btn btn-info" style="margin-left: 5px;">Add Bulk User Member</button>
+
     <button (click)="logout()" type="button" class="btn btn-warning" style="float: right;">Logout</button>
 </div>
 
